@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FaCheck } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const Todo = () => {
   const [inputValue, setInputValue] = useState("");
@@ -14,19 +16,19 @@ const Todo = () => {
     e.preventDefault();
     //-------------- checking if the inputfield is empty or not
     if (!inputValue) {
-        alert("Please insert a task")
-        return
+      alert("Please insert a task");
+      return;
     }
     //----------------- checking the same task is included or not
     if (tasks.includes(inputValue)) {
-        alert("Same task is already added")
-        setInputValue('')
-        return
+      alert("Same task is already added");
+      setInputValue("");
+      return;
     }
     //---------------- setting the task array
-    setTask((prev) => [...prev, inputValue])
+    setTask((prev) => [...prev, inputValue]);
     //---------------- clearing the input field
-    setInputValue('')
+    setInputValue("");
   };
 
   return (
@@ -64,6 +66,21 @@ const Todo = () => {
               </button>
             </div>
           </form>
+        </section>
+
+        {/*---------------------------------------- Showing all task ----------------------------------------*/}
+        <section>
+          <ul className="list bg-base-100 w-[300px] rounded-box shadow-md">
+            {tasks.map((task, index) => (
+              <li className="list-row flex justify-between items-center" key={index}>
+                <p>{task}</p>
+                <div>
+                    <button className="btn bg-green-600"><FaCheck className="text-white text-xl"/></button>
+                    <button className="btn bg-red-600 "><MdDelete  className="text-white text-xl"/></button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </section>
       </section>
     </>
