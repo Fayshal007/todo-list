@@ -42,6 +42,14 @@ const Todo = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+  // ---------------Deleting single task---------------
+  const handleDelete = (task) =>{
+    console.log(tasks);
+    console.log(task);
+    const updatedTasks = tasks.filter( n => n !== task)
+    setTask(updatedTasks)    
+    
+  }
   return (
     <>
       <section className="mx-auto h-screen bg-emerald-900 flex flex-col items-center">
@@ -94,7 +102,7 @@ const Todo = () => {
                   <button className="btn bg-green-600">
                     <FaCheck className="text-white text-xl" />
                   </button>
-                  <button className="btn bg-red-600 ">
+                  <button onClick={() =>{handleDelete(task)}} className="btn bg-red-600 ">
                     <MdDelete className="text-white text-xl" />
                   </button>
                 </div>
@@ -102,7 +110,7 @@ const Todo = () => {
             ))}
           </ul>
         </section>
-        <button className="btn btn-active btn-error">Clear All Task</button>
+        <button onClick={() => {setTask([])}} className={`btn mt-1.5 btn-active btn-error ${tasks.length === 0 ? "hidden" : ""}`}>Clear All Task</button>
       </section>
     </>
   );
